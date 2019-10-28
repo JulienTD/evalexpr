@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5be3389e779268affbfca0a8361da83cf39abd398cce7094da527281ed6df075
+-- hash: 7847e2843f23a5ccd96fe5685f27ad5eafc5c5ec5cab9116020e49b22958d684
 
 name:           evalexpr
 version:        0.1.0.0
@@ -27,6 +27,7 @@ source-repository head
 
 library
   exposed-modules:
+      Calculator
       Lib
   other-modules:
       Paths_evalexpr
