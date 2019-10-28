@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+stack exec .stack-work/dist/x86_64-linux-tinfo6/Cabal-2.4.0.1/build/evalexpr-exe/evalexpr-exe
