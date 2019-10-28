@@ -1,34 +1,27 @@
 ##
 ## EPITECH PROJECT, 2019
-## evalexpr
+## makefile
 ## File description:
-## Makefile
+## makefile
 ##
 
-PROJECT_NAME = evalexpr
+NAME	=	evalexpr
 
-BINARY_NAME = funEvalExpr
+SRC		=	app/Main.hs
 
-PATH = $(shell stack path --local-install-root)
+all:	$(NAME)
 
-$(PROJECT_NAME):
-			# stack build
-			stack exec $(PROJECT_NAME)-exe
-			cp $(PATH)/bin/$(PROJECT_NAME)-exe .
-			mv $(PROJECT_NAME)-exe $(BINARY_NAME)
+$(NAME): $(SRC)
+	stack build --copy-bins --local-bin-path .
+	mv $(NAME)-exe $(NAME)
 
-setup:
-		stack setup
 clean:
-		stack clean
+	stack clean
+	rm .stack-work evalexpr.cabal -rf
 
 fclean:	clean
-		rm -rf $(BINARY_NAME)
-		# stack purge
+	$(RM) $(NAME)
 
 re:	fclean all
 
-all:	$(PROJECT_NAME)
-
-run:
-		stack run
+.PHONY: all clean fclean re
