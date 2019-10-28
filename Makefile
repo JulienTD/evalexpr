@@ -13,10 +13,10 @@ PATH = $(shell stack path --local-install-root)
 
 $(PROJECT_NAME):
 			# stack build
-			stack exec evalexpr-exe
+			stack exec $(PROJECT_NAME)-exe
 			cp $(PATH)/bin/$(PROJECT_NAME)-exe .
 			mv $(PROJECT_NAME)-exe $(BINARY_NAME)
-ma
+
 setup:
 		stack setup
 clean:
