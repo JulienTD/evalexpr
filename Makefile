@@ -5,22 +5,24 @@
 ## makefile
 ##
 
-NAME	=	evalexpr
+NAME=	evalexpr
 
-SRC		=	app/Main.hs
+BINARY_NAME=	funEvalExpr
+
+SRC=	app/Main.hs
 
 all:	$(NAME)
 
 $(NAME): $(SRC)
 	stack build --copy-bins --local-bin-path .
-	mv $(NAME)-exe $(NAME)
+	mv $(NAME)-exe $(BINARY_NAME)
 
 clean:
 	stack clean
-	rm .stack-work evalexpr.cabal -rf
+	rm -rf .stack-work evalexpr.cabal
 
 fclean:	clean
-	$(RM) $(NAME)
+	rm -rf $(BINARY_NAME)
 
 re:	fclean all
 
