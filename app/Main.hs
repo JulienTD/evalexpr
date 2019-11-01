@@ -1,20 +1,14 @@
 module Main where
 
-import Lib
+import Calculator
+import System.Environment
+import Text.Printf
 
 main :: IO ()
 main = do
-    putStrLn "hello world"
-    -- args <- getArgs
+    args <- getArgs
 
-    -- let len [] = 0
-    -- len (h:t) = 1 + len t
-
-    -- case len args of
-    --     1 -> do
-    --         putStrLn "1 argument"
-    --     2 -> do
-    --         putStrLn "2 argument"
-    --     _ -> do
-    --             putStrLn "Too many arguments"
-    --             return()
+    case args of
+        [] -> putStrLn "Not enough arguments"
+        [str] -> (putStrLn $ (printf "%.2f" $ (evalExpr (args!!0))))
+        otherwise -> putStrLn "Too many arguments"
