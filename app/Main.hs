@@ -1,98 +1,14 @@
 module Main where
 
-import Lib
-import System.Console.GetOpt
-import System.IO
-import System.Exit
+import Calculator
 import System.Environment
-import Control.Monad
 import Text.Printf
-import System.Exit
-import Data.Char
-
--- data Ret = RetIO IO ()
---          | RetInt Int
-
-getUserInput :: Int -> [String] -> String
-getUserInput size args
-        | size == 1 = args !! 0
-        | otherwise = "error"
-
--- verifyInput :: [Char] -> Int -> Ret
--- verifyInput (char:expression) index
---         | index >= 0 && index < (length expression) && char == 'a' && index == ((length expression) - 1) = 0
---         | index >= 0 && index < (length expression) && char == 'a' = (verifyInput expression (index + 1))
---         | otherwise = (exitWith (ExitFailure 84))
-
--- data Maybe a = Nothing | Just a
-
-data Expr = SumExpr Expr Expr
-          | SubExpr Expr Expr
-          | MulExpr Expr Expr
-          | DivExpr Expr Expr
-          | PowExpr Expr Expr
-          | ValExpr Float
-
--- eval :: Expr -> Integer
--- eval e = case e of
--- AddExpr a b -> eval a + eval b
--- SubExpr a b -> eval a - eval b
--- MulExpr a b -> eval a * eval b
--- DivExpr a b -> eval a / eval b
--- PowExpr a b -> eval a ^ eval b
-
--- Lit n   -> n
-
-type Parser a = String -> Maybe (a, String)
-
-data Cmd = GET -- | POST | PUT | DELETE
-        deriving Show
-
-parseString :: a -> String -> Parser a
-        --     :: a -> String -> (String -> Maybe (a, String))
-parseString a "" input = Just(a, input)
-parseString a (x:xs) "" = Nothing
-parseString a (x:xs) (y:ys) | x == y = parseString a xs ys
-parseString a _ _ = Nothing
-
-parseAdd :: Parser Cmd
-parseAdd = parseString GET "+"
-
-anyOf :: [Parser a] -> Parser a
--- anyOf :: [String -> Maybe (a, String) -> (String -> Maybe (a, String))]
-anyOf [] _ = Nothing
-anyOf (p: ps) input =
-        case p input of
-                Nothing -> anyOf ps input
-                ret -> ret
-
-parseCmd :: Parser Cmd
-parseCmd = anyOf [parseAdd]
 
 main :: IO ()
 main = do
     args <- getArgs
 
-    putStrLn (if (length args) > 0 then (args !! 0) else "Not enough arguments")
---     verifyInput (getUserInput (length args) args) 0
-
--- import Data.List
--- import Data.Char
--- import Control.Monad
--- import Text.Printf
-
--- checkLength :: Int List -> String
--- checkLength size list   | size == 1 = list !! 0
---                         | otherwise = ""
-
--- main :: IO ()
--- main = do
-
---     args <- getArgs
---     -- case 
---     -- str <- return( args !! 0)
---     putStrLn ("The first arg is " $ checkLength length args, args)
-
--- -- checkLength :: (List list, Integral size) => list => size -> String
--- -- checkLength 1 = "One!"
--- -- checkLength x = "Not between 1 and 5"
+    case args of
+        [] -> putStrLn "Not enough arguments"
+        [str] -> (putStrLn $ (printf "%.2f" $ (evalExpr (args!!0))))
+        otherwise -> putStrLn "Too many arguments"
