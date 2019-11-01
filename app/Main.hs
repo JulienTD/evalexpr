@@ -8,6 +8,7 @@ import System.Environment
 import Control.Monad
 import Text.Printf
 import System.Exit
+import Data.Char
 
 -- data Ret = RetIO IO ()
 --          | RetInt Int
@@ -27,10 +28,20 @@ getUserInput size args
 
 data Expr = SumExpr Expr Expr
           | SubExpr Expr Expr
-          | MultExpr Expr Expr
+          | MulExpr Expr Expr
           | DivExpr Expr Expr
-          | Power Expr Expr
-          | Val Float
+          | PowExpr Expr Expr
+          | ValExpr Float
+
+-- eval :: Expr -> Integer
+-- eval e = case e of
+-- AddExpr a b -> eval a + eval b
+-- SubExpr a b -> eval a - eval b
+-- MulExpr a b -> eval a * eval b
+-- DivExpr a b -> eval a / eval b
+-- PowExpr a b -> eval a ^ eval b
+
+-- Lit n   -> n
 
 type Parser a = String -> Maybe (a, String)
 
@@ -44,10 +55,8 @@ parseString a (x:xs) "" = Nothing
 parseString a (x:xs) (y:ys) | x == y = parseString a xs ys
 parseString a _ _ = Nothing
 
-parseGet :: Parser Cmd
-parseGet = parseString GET "GET"
--- parsePost = _
--- parsePut = _
+parseAdd :: Parser Cmd
+parseAdd = parseString GET "+"
 
 anyOf :: [Parser a] -> Parser a
 -- anyOf :: [String -> Maybe (a, String) -> (String -> Maybe (a, String))]
@@ -58,7 +67,7 @@ anyOf (p: ps) input =
                 ret -> ret
 
 parseCmd :: Parser Cmd
-parseCmd = anyOf [parseGet]
+parseCmd = anyOf [parseAdd]
 
 main :: IO ()
 main = do
