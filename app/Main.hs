@@ -35,4 +35,4 @@ main = do
     result <- catchAny (dangerous (args!!0))$ \e -> do
         putStrLn $ "Got an exception: " ++ show e
         exitWith (ExitFailure 84)
-    (putStrLn $ (printf "%.2f" $ (result)))
+    if (modulo (result * 1000) 10 == 5) then (putStrLn $ (printf "%.2f" $ (result + if result < 0 then -0.0001 else 0.0001))) else (putStrLn $ (printf "%.2f" $ (result)))

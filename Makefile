@@ -1,15 +1,15 @@
 ##
 ## EPITECH PROJECT, 2019
-## makefile
+## Makefile
 ## File description:
-## makefile
+## Compile the evalExpr
 ##
 
-NAME=	evalexpr
+NAME		=	evalexpr
 
-BINARY_NAME=	funEvalExpr
+BINARY_NAME	=	funEvalExpr
 
-SRC=	app/Main.hs
+SRC			=	app/Main.hs
 
 all:	$(NAME)
 
